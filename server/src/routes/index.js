@@ -1,0 +1,5 @@
+export * from './userRoutes.js'
+export * from './studentRoutes.js'
+export * from './interviewRoutes.js'
+export * from './teacherRoutes.js'
+export * from './groupRoutes.js'
