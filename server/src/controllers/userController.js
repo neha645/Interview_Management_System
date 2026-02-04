@@ -1,5 +1,43 @@
+import { User } from '../models/User.js';
 import { findUserByEmail, validatePassword, createTokens, verifyRefreshToken } from '../services/userService.js';
 import { ApiResponse, ApiError } from '../utils/apiResponse.js';
+
+export const registerUser = async (req, res, next) => {
+    try {
+        console.log("Request received in login user controller");
+        console.log("Request Body: ", req.body)
+
+        const { name, email, password } = req.body;
+
+        if (!name || !email || !password) {
+            return ApiError(res, {
+                message: 'Email or Password are missing',
+                statusCode: 400
+            });
+        }
+        const user = await findUserByEmail(email);
+
+        if (user) {
+            return ApiError(res, {
+                message: 'User Already Exists',
+                statusCode: 409
+            });
+        }
+
+        const newUser = new User({ name, email, password })
+
+        await newUser.save();
+
+        // Return the response
+        return ApiResponse(res, {
+            message: 'User Registered successful',
+            data: { newUser }
+        });
+
+    } catch (error) {
+        next(error);
+    }
+};
 
 export const loginUser = async (req, res, next) => {
     try {
@@ -30,13 +68,13 @@ export const loginUser = async (req, res, next) => {
                 message: 'Invalid Password',
             });
         }
-        
+
         if (!user.isActive) {
             return ApiError(res, {
                 message: 'Your account is not active. Please contact admin',
             });
         }
-        
+
 
         // Create both access and refresh tokens
         const { accessToken, refreshToken } = createTokens(user);

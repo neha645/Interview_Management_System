@@ -68,14 +68,14 @@ const StudentProfile = () => {
                 </p>
 
                 <p className="text-lg text-gray-700 dark:text-white">
-                  <strong>class:</strong> <span>{student.class}</span>
+                  <strong>Class:</strong> <span>{student.class}</span>
                 </p>
                 <p className="text-lg text-gray-700 dark:text-white">
                   <strong>Phone:</strong>{" "}
                   <span>{student.phone || "Not Provided"}</span>
                 </p>
                 <p className="text-lg  text-gray-700 dark:text-white ">
-                  <strong>Email:</strong>{" "}
+                  <strong>E-mail:</strong>{" "}
                   <span>{student.email || "Not Provided"}</span>
                 </p>
                 <p className="text-lg text-gray-700 dark:text-white">

@@ -16,6 +16,7 @@ import Teachers from "./components/teachers/Teachers";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import NotFound from "./components/NotFound";
 import WelcomePage from "./components/WelcomePage";
+import Register from "./components/auth/Register";
 
 // Constants
 const ROLES = {
@@ -31,6 +32,7 @@ const App = () => {
           {/* Public routes */}
           <Route path="/" element={<WelcomePage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           {/* Private routes */}
           <Route element={<PrivateRoute><Layout /></PrivateRoute>}>
