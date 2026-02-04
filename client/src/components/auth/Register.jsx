@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { Mail, Lock, User, UserPlus } from "lucide-react"; // Import the icon
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../../api/axiosInstance";
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
@@ -29,7 +30,9 @@ const Register = () => {
     onSubmit: async (values) => {
       try {
         
-        const response = await axios.post('http://localhost:3000/api/user/register',values)
+        const response = await axiosInstance.post('/api/user/register',values)
+        console.log("Registration successful", response.data);
+        navigate("/login");
 
       } catch (error) {
         console.error("Error in registration", error);
